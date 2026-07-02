@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, Wand2, FileText, BarChart3, Lightbulb, ChevronRight } from 'lucide-react'
+import { Sparkles, Layers, ClipboardList, FileCheck, FlaskConical, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface AITool {
@@ -13,34 +13,34 @@ interface AITool {
 
 const tools: AITool[] = [
   {
-    id: 'generateQuestion',
-    name: '智能出题',
-    description: '根据知识点自动生成题目',
-    icon: Wand2,
+    id: 'aiChain',
+    name: 'AI接龙',
+    description: 'AI驱动的课堂互动接龙活动',
+    icon: Layers,
     color: 'text-amber-400',
     bgColor: 'bg-amber-400/10',
   },
   {
-    id: 'summarize',
-    name: '讨论小结',
-    description: 'AI总结讨论要点',
-    icon: FileText,
+    id: 'aiReport',
+    name: 'AI课堂教学报告',
+    description: '自动生成课堂教学分析报告',
+    icon: ClipboardList,
     color: 'text-green-400',
     bgColor: 'bg-green-400/10',
   },
   {
-    id: 'analyze',
-    name: '测验分析',
-    description: '分析学生答题情况',
-    icon: BarChart3,
+    id: 'aiTicket',
+    name: 'AI工单',
+    description: '智能化工单管理与跟踪',
+    icon: FileCheck,
     color: 'text-blue-400',
     bgColor: 'bg-blue-400/10',
   },
   {
-    id: 'suggest',
-    name: '教学建议',
-    description: 'AI推荐教学策略',
-    icon: Lightbulb,
+    id: 'aiPractice',
+    name: 'AI实践',
+    description: 'AI辅助的实践教学工具',
+    icon: FlaskConical,
     color: 'text-purple-400',
     bgColor: 'bg-purple-400/10',
   },

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { X, Wand2, FileText, BarChart3, Lightbulb, Loader2, Copy, RefreshCw } from 'lucide-react'
+import { X, Layers, ClipboardList, FileCheck, FlaskConical, Loader2, Copy, RefreshCw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface AIToolDetailModalProps {
@@ -9,10 +9,10 @@ interface AIToolDetailModalProps {
 }
 
 const toolConfig: Record<string, { name: string; icon: React.ElementType; color: string; bgColor: string; description: string }> = {
-  generateQuestion: { name: '智能出题', icon: Wand2, color: 'text-amber-400', bgColor: 'bg-amber-400/10', description: '根据知识点自动生成题目' },
-  summarize: { name: '讨论小结', icon: FileText, color: 'text-green-400', bgColor: 'bg-green-400/10', description: 'AI总结讨论要点' },
-  analyze: { name: '测验分析', icon: BarChart3, color: 'text-blue-400', bgColor: 'bg-blue-400/10', description: '分析学生答题情况' },
-  suggest: { name: '教学建议', icon: Lightbulb, color: 'text-purple-400', bgColor: 'bg-purple-400/10', description: 'AI推荐教学策略' },
+  aiChain: { name: 'AI接龙', icon: Layers, color: 'text-amber-400', bgColor: 'bg-amber-400/10', description: 'AI驱动的课堂互动接龙活动' },
+  aiReport: { name: 'AI课堂教学报告', icon: ClipboardList, color: 'text-green-400', bgColor: 'bg-green-400/10', description: '自动生成课堂教学分析报告' },
+  aiTicket: { name: 'AI工单', icon: FileCheck, color: 'text-blue-400', bgColor: 'bg-blue-400/10', description: '智能化工单管理与跟踪' },
+  aiPractice: { name: 'AI实践', icon: FlaskConical, color: 'text-purple-400', bgColor: 'bg-purple-400/10', description: 'AI辅助的实践教学工具' },
 }
 
 export default function AIToolDetailModal({ toolId, isOpen, onClose }: AIToolDetailModalProps) {
@@ -21,7 +21,7 @@ export default function AIToolDetailModal({ toolId, isOpen, onClose }: AIToolDet
 
   if (!isOpen || !toolId) return null
 
-  const config = toolConfig[toolId] || toolConfig.generateQuestion
+  const config = toolConfig[toolId] || toolConfig.aiChain
   const Icon = config.icon
 
   const handleGenerate = () => {
@@ -29,51 +29,119 @@ export default function AIToolDetailModal({ toolId, isOpen, onClose }: AIToolDet
     setResult(null)
     setTimeout(() => {
       setIsGenerating(false)
-      if (toolId === 'generateQuestion') {
-        setResult(`【单选题】TCP协议和UDP协议的主要区别是什么？
+      if (toolId === 'aiChain') {
+        setResult(`【AI接龙活动】计算机网络协议接龙
 
-A. TCP是面向连接的，UDP是无连接的
-B. TCP是无连接的，UDP是面向连接的
-C. 两者都支持可靠传输
-D. 两者都不支持流量控制
+活动主题：TCP/IP协议族知识接龙
+参与人数：48人
+活动时间：15分钟
 
-正确答案：A
+接龙内容：
+1. TCP是面向连接的传输层协议 —— 张三
+2. UDP是无连接的传输层协议 —— 李四
+3. IP协议工作在网络层 —— 王五
+4. HTTP默认端口是80 —— 赵六
+5. HTTPS默认端口是443 —— 孙七
+6. DNS使用UDP端口53 —— 周八
+7. FTP使用TCP端口21 —— 吴九
+8. SMTP用于发送邮件 —— 郑十
 
-解析：TCP（传输控制协议）是面向连接的、可靠的传输层协议，提供流量控制和拥塞控制；UDP（用户数据报协议）是无连接的、不可靠的传输层协议，传输效率高但不保证可靠性。`)
-      } else if (toolId === 'summarize') {
-        setResult(`讨论小结：
+统计：
+- 参与人数：48人（覆盖率100%）
+- 接龙条数：48条
+- 正确率：91.7%
+- 活跃关键词：端口、协议、层`)
+      } else if (toolId === 'aiReport') {
+        setResult(`【AI课堂教学报告】
 
-核心观点：
-1. TCP协议的可靠性高，适合文件传输、网页浏览等场景
-2. UDP协议传输效率高，适合视频直播、在线游戏等实时场景
-3. 实际应用中需要根据具体需求选择合适的协议
+课程：计算机网络基础
+班级：计算机科学2024级1班
+课时：第5周 第2节
 
-学生关注度：可靠性(15次)、效率(12次)、安全性(10次)
+一、课堂参与情况
+- 应到人数：48人
+- 实到人数：46人（出勤率95.8%）
+- 互动参与率：89.6%
+- 平均专注度：87.3分
 
-教学建议：可以结合具体案例帮助学生理解两种协议的适用场景。`)
-      } else if (toolId === 'analyze') {
-        setResult(`测验分析报告：
+二、知识点掌握情况
+- TCP/IP协议层次结构：掌握率92%
+- 常用端口号：掌握率78%（需加强）
+- OSI七层模型：掌握率85%
+- 三次握手/四次挥手：掌握率81%
 
-整体表现：
-- 平均分：85.5分
-- 提交率：93.8%（45/48人）
-- 平均正确率：82%
+三、课堂活动效果
+- 签到活动：完成率100%
+- AI接龙活动：参与率100%，正确率91.7%
+- 课堂讨论：发言人次32人
 
-题目分析：
-- 第1题（TCP协议层）：正确率92% - 掌握良好
-- 第2题（UDP特点）：正确率88% - 掌握良好
-- 第3题（HTTP端口）：正确率76% - 需加强
+四、教学建议
+1. 针对端口号记忆薄弱点，建议采用联想记忆法
+2. 增加三次握手过程的动画演示
+3. 课后推送练习题巩固知识点`)
+      } else if (toolId === 'aiTicket') {
+        setResult(`【AI工单管理】
 
-知识薄弱点：
-- HTTP默认端口号（80）记忆不牢固
-- TCP三次握手过程理解有偏差`)
+待处理工单：3条
+
+工单 #20240702001
+- 类型：设备故障
+- 提交人：张老师
+- 时间：2024-07-02 09:15
+- 内容：多媒体教室A301投影仪无法正常显示
+- 状态：待处理
+- AI建议：优先处理，影响正常授课，预计维修时间30分钟
+
+工单 #20240702002
+- 类型：网络问题
+- 提交人：李同学
+- 时间：2024-07-02 10:30
+- 内容：实验室网络连接不稳定，频繁掉线
+- 状态：处理中
+- AI建议：联系网络中心排查交换机状态
+
+工单 #20240702003
+- 类型：软件申请
+- 提交人：王老师
+- 时间：2024-07-02 14:00
+- 内容：申请在机房安装Python 3.12环境
+- 状态：待审批
+- AI建议：批量部署，预计影响50台机器
+
+统计：本月累计处理工单28条，平均处理时长2.3小时`)
       } else {
-        setResult(`教学建议：
+        setResult(`【AI实践教学】
 
-1. 增加实践环节：让学生通过Wireshark抓包观察TCP三次握手过程
-2. 案例教学：结合实际应用场景（如视频通话、文件下载）对比两种协议
-3. 互动讨论：组织小组讨论"如果设计一种新的网络协议，你会如何平衡可靠性和效率"
-4. 课后巩固：布置实验作业，要求学生搭建简单的客户端/服务端程序`)
+实践项目：Wireshark抓包分析实验
+
+一、实验目标
+1. 掌握Wireshark抓包工具的基本使用
+2. 观察TCP三次握手过程
+3. 分析HTTP请求/响应报文结构
+
+二、实验环境
+- Wireshark 4.0+
+- 操作系统：Windows 10/11 或 macOS
+- 网络环境：校园网
+
+三、实验步骤
+1. 打开Wireshark，选择网卡开始抓包
+2. 访问 http://example.com 并停止抓包
+3. 过滤TCP协议，找到三次握手报文
+4. 分析SYN、SYN-ACK、ACK报文
+5. 过滤HTTP协议，查看请求头和响应头
+
+四、AI辅助功能
+- 自动识别异常报文
+- 智能标注关键字段
+- 生成实验报告模板
+- 提供拓展练习题
+
+五、评价标准
+- 完成抓包操作（30分）
+- 正确识别三次握手（30分）
+- 分析HTTP报文（20分）
+- 实验报告质量（20分）`)
       }
     }, 2000)
   }
